@@ -7,7 +7,6 @@ const registerController = async (req, res) => {
 
     const newUser = await registerUser({
       ...req.body,
-      file,
     });
 
     return res.status(201).json({
