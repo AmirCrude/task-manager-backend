@@ -3,15 +3,14 @@ const { registerUser } = require("../services/register.service");
 
 const registerController = async (req, res) => {
   try {
-    const file = req.file || null;
 
     const newUser = await registerUser({
       ...req.body,
-    });
+    });    
 
     return res.status(201).json({
       success: true,
-      message: `${newUser.role} registered successfully`,
+      message: `${newUser.name} registered successfully`,
 
     });
   } catch (error) {

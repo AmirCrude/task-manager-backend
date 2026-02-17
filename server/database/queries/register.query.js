@@ -12,7 +12,7 @@ const register = async (data) => {
     `;
     const params = [
       data.email,
-      data.password_hash || null,
+      data.password_hash,
       data.name,
     ];
 

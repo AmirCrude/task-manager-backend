@@ -24,7 +24,6 @@ const login = async (email, password) => {
   // Include everything inside JWT
   const tokenPayload = {
     userId: user.user_id,
-    role: user.role,
   };
 
   const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, {
@@ -47,11 +46,12 @@ const forgotPassword = async (email) => {
   if (!user) return { success: false, message: "Email not found" };
 
   const token = jwt.sign(
-    { userId: user.user_id, role: user.role },
+    { userId: user.user_id},
     process.env.JWT_SECRET,
     { expiresIn: "1h" }
   );
-
+  console.log(token);
+  
   await sendResetTokenEmail(email, token);
 
   return { success: true, message: "Reset link sent to your email" };

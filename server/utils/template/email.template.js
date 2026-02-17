@@ -4,7 +4,7 @@ const { transporter } = require("../../configs/email.config");
 // Send password reset email
 const sendResetTokenEmail = async (email, token) => {
   try {
-    const appName = "ETH_law"; // fixed app name
+    const appName = "Task Manager"; // fixed app name
     const resetUrl = `${process.env.CLIENT_URL}/auth/reset-password?token=${token}`;
 
     await transporter.sendMail({
@@ -136,21 +136,20 @@ ${appName} Team
 };
 
 // Send registration email to new users (citizen or lawyer)
-const sendRegistrationEmail = async (email, firstName, role) => {
+const sendRegistrationEmail = async (email, firstName=name) => {
   try {
-    const appName = "ETH_law"; // fixed app name
+    const appName = "Task Manager"; // fixed app name
     const loginUrl = `${process.env.CLIENT_URL}/auth/login`;
 
-    const roleText = role === "citizen" ? "Citizen Portal" : "Lawyer Portal";
 
     await transporter.sendMail({
       from: `"${appName}" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: `${appName} | Welcome to ${roleText}`,
+      subject: `| Welcome to ${appName}`,
       text: `
 Dear ${firstName},
 
-Welcome to ${appName} ${roleText}.
+Welcome to ${appName}.
 
 Your account has been created successfully.
 
@@ -165,7 +164,7 @@ ${appName} Team
 
   <p>Dear <strong>${firstName}</strong>,</p>
 
-  <p>Your ${roleText} account has been created successfully.</p>
+  <p>Your ${appName} account has been created successfully.</p>
 
   <p style="margin: 20px 0;">
     <a href="${loginUrl}"

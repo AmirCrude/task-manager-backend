@@ -1,4 +1,3 @@
-const cloudinaryService = require("./cloudinary.service");
 const { hashedPassword } = require("../utils/password/password.manager");
 const registerQuery = require("../database/queries/register.query");
 const { sendRegistrationEmail } = require("../utils/template/email.template");
@@ -27,7 +26,7 @@ const registerUser = async (userData) => {
     name,
   });
   // Send registration email
-  await sendRegistrationEmail(email, first_name, role);
+  await sendRegistrationEmail(email, name);
 
   return newUser;
 };
